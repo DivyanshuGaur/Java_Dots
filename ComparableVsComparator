@@ -1,0 +1,169 @@
+package Practise;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+// comparable -> interface 
+// compareTo() -> 
+// <> -> Generic 
+// applicable to one type only -> age 
+// comparable -> like students is implementing the comparable
+//then comparable should be in the definition of class students
+//lang 
+
+class Students implements Comparable<Students>{
+	
+		int age;
+		int rollno;
+		String name;
+		
+		
+		Students(int age , int rollno , String name){
+			
+				this.age=age;
+				this.rollno=rollno;
+				this.name=name;
+			
+			
+		}
+
+
+		@Override
+		public int compareTo(Students o) { //s1
+			// TODO Auto-generated method stub
+			return this.age-o.age;
+		}
+	
+}
+
+
+
+// comparator -> interface
+// compare() 2 objects of generic type 
+// can be shortened using lambda ->
+// util package
+// need to invoke->Collections.sort(list,Object of Class implementing Comparator)
+
+//Can be used with multiple types 
+
+
+
+/*class SortByRollno implements Comparator<Students>{
+
+	@Override
+	public int compare(Students o1, Students o2) {
+		
+		return o1.rollno-o2.rollno;
+	}
+
+}*/
+
+
+
+
+class SortByName implements Comparator<Students>{
+
+	@Override
+	public int compare(Students o1, Students o2) {
+		
+		return o1.name.compareTo(o2.name);
+	}
+
+}
+
+
+public class ComparableVsComparator {
+
+	public static void main(String[] args) {
+		
+			Students s1=new Students(21,5,"add");
+			Students s2=new Students(29,6,"dad");
+			Students s3=new Students(24,4,"sda");
+			
+			
+			List<Students> slist=new ArrayList<>();
+			slist.add(s1);
+			slist.add(s2);
+			slist.add(s3);
+	
+			
+			//System.out.println(slist);
+			
+			
+			
+			
+			//comparable 
+			
+			Collections.sort(slist); // compareTo s1
+			
+			
+			for(Students st : slist) {
+				
+					System.out.println(st.age+"  "+st.name +" "+st.rollno);
+			}
+			
+			
+			System.out.println("------------------");
+			
+			// Comparator
+			/*SortByRollno ob=new SortByRollno();
+			
+			Collections.sort(slist,ob);
+			
+			
+
+			for(Students st : slist) {
+				
+					System.out.println(st.age+"  "+st.name +" "+st.rollno);
+			}*/
+			
+			
+			
+			Collections.sort(slist,
+					
+					(a,b)->b.rollno-a.rollno // lambda func
+					
+					);
+			
+			
+			
+			
+			for(Students st : slist) {
+				
+				System.out.println(st.age+"  "+st.name +" "+st.rollno);
+				}
+			
+			
+			
+			
+			
+			System.out.println("------------------");
+			
+			
+			SortByName ob2=new SortByName();
+			Collections.sort(slist,ob2);
+			
+
+			for(Students st : slist) {
+				
+					System.out.println(st.age+"  "+st.name +" "+st.rollno);
+			}
+			
+			
+			
+			
+		
+		
+
+	}
+
+}
+
+
+
+
+
+
+
